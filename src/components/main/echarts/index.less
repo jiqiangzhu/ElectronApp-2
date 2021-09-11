@@ -1,0 +1,32 @@
+.home-content {
+  flex: 1 1 auto;
+
+  .content {
+    display: flex;
+
+    .scroll-bar {
+      overflow-y   : hidden;
+      overflow-x   : hidden;
+      max-height   : 100%;
+      padding-right: 10px;
+
+      .ant-list-item {
+        border: none;
+      }
+    }
+
+    .scroll-bar:hover {
+      overflow-y   : scroll;
+      padding-right: 0px;
+    }
+
+    .scroll-bar::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .scroll-bar::-webkit-scrollbar-thumb {
+      background-color: #11171a;
+      border-radius   : 10px;
+    }
+  }
+}

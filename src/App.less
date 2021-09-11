@@ -1,0 +1,178 @@
+@import '~antd/dist/antd.less';
+@import url('hover.css');
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.cannotselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.main-content {
+  width: 100vw;
+  height: 100vh;
+  padding: 0.13rem 0.15rem 0.09rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  .ant-tabs-tab-active .anticon svg {
+    color: #00ced1;
+  }
+  .ant-layout {
+    padding: 0 0;
+  }
+}
+
+.ant-tabs-tabpane {
+  display: flex;
+}
+
+.webkit-no-drag {
+  -webkit-app-region: no-drag;
+  cursor: pointer;
+}
+
+.webkit-drag {
+  -webkit-app-region: drag;
+}
+
+.anticon svg {
+  color: #fff;
+}
+
+.ant-input-group-addon {
+  .ant-input-search-button {
+    border: 0.02rem #efefef solid;
+    border-left: none;
+    border-bottom-right-radius: 0.01rem;
+    border-top-right-radius: 0.01rem;
+  }
+}
+
+.ant-layout-footer {
+  padding: 0 0.1rem;
+}
+
+// Pre-defined style
+.flex-align-mid {
+  align-items: center;
+}
+
+.ant-drawer-title {
+  color: #fff;
+}
+
+.ant-drawer-body {
+  padding: 0.1rem;
+}
+
+.flex-align-self-start {
+  align-items: flex-start;
+}
+
+.flex-justify-end {
+  justify-content: flex-end;
+}
+
+.full {
+  width: 100%;
+}
+
+.item-fixed {
+  position: fixed;
+}
+
+.flex-type {
+  display: flex;
+}
+
+.align-self-start {
+  align-self: flex-start;
+}
+
+.flex-justify-start {
+  justify-content: flex-start;
+}
+
+.ant-list-items .ant-list-item {
+  border-bottom: none;
+}
+
+.ant-list-items .ant-list-item p {
+  white-space: nowrap;
+  overflow: hidden;
+  width: 90%;
+  text-overflow: ellipsis;
+}
+
+.ant-list-items .ant-list-item:hover {
+  color: #00ced1;
+}
+
+.flex-justify-evenly {
+  justify-content: space-between;
+}
+
+.border-radius-5 {
+  border-radius: 50%;
+}
+
+.padding-top5 {
+  padding-top: 0.05rem;
+}
+
+.padding-left5 {
+  padding-left: 0.05rem;
+}
+
+.padding-left15 {
+  padding-left: 0.15rem;
+}
+
+.my-content {
+  overflow-y: hidden;
+  overflow-x: hidden;
+  max-height: 100%;
+  padding: 0.2rem;
+  &:hover {
+    overflow-y: scroll;
+    padding-right: 0rem;
+  }
+  &::-webkit-scrollbar {
+    width: 0.15rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #11171a77;
+    border-radius: 0.15rem;
+  }
+}
+
+.ant-empty-description {
+  color: #fff;
+}
+
+.ant-drawer-wrapper-body {
+  background-color: rgba(59, 59, 77, 1);
+}
+
+
+@keyframes switch {
+  0%,
+  33.1% {
+    margin-left: 0rem;
+  }
+  33.5%,
+  67% {
+    margin-left: -0.9rem;
+  }
+  67.4%,
+  100% {
+    margin-left: -2rem;
+  }
+}

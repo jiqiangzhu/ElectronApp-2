@@ -1,0 +1,31 @@
+div.at-container {
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    height         : 100%;
+}
+
+.at-item {
+    width                    : 100px;
+    height                   : 100px;
+    background-color         : #ffe672;
+    animation-name           : scale-down-center;
+    animation-duration       : 1s;
+    animation-timing-function: ease;
+    animation-delay          : 0s;
+    animation-iteration-count: 1;
+    animation-direction      : normal;
+    animation-fill-mode      : none;
+}
+
+@keyframes scale-down-center {
+    0% {
+        -webkit-transform: scale(1);
+        transform        : scale(1);
+    }
+
+    100% {
+        -webkit-transform: scale(0.2);
+        transform        : scale(0.2);
+    }
+}

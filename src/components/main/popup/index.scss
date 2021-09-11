@@ -1,0 +1,83 @@
+.ant-drawer-mask {
+  cursor : default;
+  opacity: 0.9;
+}
+
+.music-popup {
+  .ant-list-item {
+    border: none;
+
+    span {
+      display: flex;
+      width  : 12.4rem;
+
+      & p {
+        width: 5rem;
+      }
+
+      //   & p:first-child {
+      //     width: 6.2rem;
+      //   }
+      //   & p:nth-child(2) {
+      //       width: 6.2rem;
+      //   }
+    }
+  }
+
+  .list-item {
+    animation: slider 10s linear infinite;
+
+    &:hover {
+      animation-play-state: paused;
+    }
+  }
+
+  .music-active {
+    color                  : #00ced1;
+    background             : #00ced1 linear-gradient(-135deg, #acd69a 30%, #87d068 60%, transparent);
+    background-size        : 0.3rem 0.3rem;
+    background-repeat      : no-repeat;
+    background-clip        : text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation              : scratchy 5s linear infinite;
+    font-size              : 0.22rem;
+    overflow               : auto !important;
+    text-overflow          : unset !important;
+  }
+}
+
+.ant-drawer-title {
+  color: #fff;
+}
+
+.ant-tooltip-content {
+  .ant-tooltip-inner {
+    background-color: #00ced14d;
+    color           : #00ced1;
+  }
+}
+
+.ant-drawer-body {
+  padding: 0;
+}
+
+@keyframes scratchy {
+  0% {
+    background-position: -50% 0;
+  }
+
+  100% {
+    background-position: 130% 0;
+  }
+}
+
+@keyframes slider {
+  0% {
+    margin-left: 0;
+  }
+
+  100% {
+    margin-left: -6.2rem;
+  }
+}

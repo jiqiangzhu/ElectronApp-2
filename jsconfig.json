@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "@localUtils/": [
+                "src/utils"
+            ]
+        },
+        "experimentalDecorators": true
+    },
+    "exclude": [
+        "node_modules",
+        "build"
+    ]
+}

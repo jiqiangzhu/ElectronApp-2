@@ -1,0 +1,64 @@
+.menu-bar {
+  flex: 0 0 auto;
+
+  .scroll-bar {
+    overflow-y   : hidden;
+    overflow-x   : hidden;
+    max-height   : 100%;
+    padding-right: 10px;
+
+    .ant-menu-dark .ant-menu-inline.ant-menu-sub {
+      background-color: transparent;
+    }
+
+    .ant-menu-inline-collapsed {
+      width: auto;
+    }
+
+    .ant-menu-item {
+      border-radius: 0 0.3rem 0;
+    }
+
+    .ant-menu-item:hover,
+    .ant-menu-item:focus,
+    .ant-menu-item:active {
+      transform: scale(1.1);
+    }
+
+    .ant-menu-item-selected {
+      border-radius: 0 30px 0;
+    }
+  }
+
+  .scroll-bar:hover {
+    overflow-y   : scroll;
+    padding-right: 0px;
+  }
+
+  .scroll-bar::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .scroll-bar::-webkit-scrollbar-thumb {
+    background-color: rgba(42, 39, 39, 0.841);
+    border-radius   : 10px;
+  }
+}
+
+.ant-tooltip-inner {
+  font-size    : 12px;
+  padding      : 5px 7px;
+  border-radius: 0.08rem;
+}
+
+.ant-menu-dark,
+.ant-menu-submenu-popup {
+
+  .ant-menu,
+  .ant-menu-dark,
+  .ant-menu-sub {
+    color        : rgba(255, 255, 255, 0.65);
+    background   : #3b3b4d !important;
+    border-radius: 10px;
+  }
+}

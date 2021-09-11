@@ -1,0 +1,337 @@
+.loading {
+  position        : absolute;
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
+  height          : 100vh;
+  background-color: rgba(59, 59, 77, 0.9);
+  width           : 100vw;
+
+  .box1 {
+    width        : 6rem;
+    height       : 6rem;
+    background   : rgba(90, 94, 94, 0.5);
+    border-radius: 0.8rem;
+    position     : relative;
+
+    .solar {
+      margin       : 2.5rem auto 3.5rem;
+      height       : 0.5rem;
+      width        : 0.5rem;
+      background   : orange;
+      border-radius: 0.25rem;
+      position     : relative;
+      animation    : glow 1.5s linear infinite;
+
+      i {
+        border-radius   : 2.5rem;
+        display         : block;
+        position        : absolute;
+        border          : 0.01rem solid rgba(255, 255, 255, 0.15);
+        box-sizing      : border-box;
+        box-sizing      : border-box;
+        transform-origin: 50% 50%;
+      }
+
+      i:before {
+        content      : '';
+        border-radius: 0.25rem;
+        background   : black;
+        display      : block;
+        position     : absolute;
+        top          : -0.05rem;
+        right        : 45%;
+      }
+
+      .mercury {
+        width      : 0.8rem;
+        height     : 0.8rem;
+        margin-left: -0.4rem;
+        left       : 50%;
+        top        : 50%;
+        margin-top : -0.4rem;
+        animation  : orbit 0.5s linear infinite;
+        animation  : orbit 0.5s linear infinite;
+      }
+
+      .mercury:before {
+        background: #6f5f5f;
+        height    : 0.07rem;
+        width     : 0.07rem;
+      }
+
+      .venus {
+        width      : 1.1rem;
+        height     : 1.1rem;
+        margin-left: -0.55rem;
+        left       : 50%;
+        top        : 50%;
+        margin-top : -0.55rem;
+        animation  : orbit 1s linear infinite;
+        animation  : orbit 1s linear infinite;
+      }
+
+      .venus:before {
+        background: #e7a71f;
+        height    : 0.1rem;
+        width     : 0.1rem;
+      }
+
+      .earth {
+        width      : 1.4rem;
+        height     : 1.4rem;
+        margin-left: -0.7rem;
+        left       : 50%;
+        top        : 50%;
+        margin-top : -0.7rem;
+        animation  : orbit 1.5s linear infinite;
+        animation  : orbit 1.5s linear infinite;
+      }
+
+      .earth:before {
+        background: #63bee2;
+        height    : 0.1rem;
+        width     : 0.1rem;
+      }
+
+      .mars {
+        width      : 1.7rem;
+        height     : 1.7rem;
+        margin-left: -0.85rem;
+        left       : 50%;
+        top        : 50%;
+        margin-top : -0.85rem;
+        animation  : orbit 2s linear infinite;
+        animation  : orbit 2s linear infinite;
+      }
+
+      .mars:before {
+        background: red;
+        height    : 0.1rem;
+        width     : 0.1rem;
+      }
+
+      .belt {
+        border-width: 0.25rem;
+        width       : 2.4rem;
+        height      : 2.4rem;
+        margin-left : -1.2rem;
+        border-color: rgba(36, 35, 35, 0.21);
+        left        : 50%;
+        top         : 50%;
+        margin-top  : -1.2rem;
+      }
+
+      .jupiter {
+        width      : 2.6rem;
+        height     : 2.6rem;
+        margin-left: -1.3rem;
+        left       : 50%;
+        top        : 50%;
+        margin-top : -1.3rem;
+        animation  : orbit 2.5s linear infinite;
+        animation  : orbit 2.5s linear infinite;
+      }
+
+      .jupiter:before {
+        background: #cf9b2b;
+        top       : -0.15rem;
+        height    : 0.3rem;
+        width     : 0.3rem;
+      }
+
+      .saturn {
+        width      : 3.2rem;
+        height     : 3.2rem;
+        margin-left: -1.6rem;
+        left       : 50%;
+        top        : 50%;
+        margin-top : -1.6rem;
+        animation  : orbit 3s linear infinite;
+        animation  : orbit 3s linear infinite;
+      }
+
+      .saturn:before {
+        background: #cf7a2b;
+        top       : -0.1rem;
+        height    : 0.2rem;
+        width     : 0.2rem;
+      }
+
+      .saturn:after {
+        background: #fff;
+        width     : 0.3rem;
+        height    : 0.01rem;
+        content   : '';
+        position  : absolute;
+        display   : block;
+        background: #fff;
+        width     : 0.3rem;
+        height    : 0.01rem;
+        content   : '';
+        right     : 43.5%;
+        transform : rotate(20deg);
+        transform : rotate(20deg);
+      }
+
+      .uranus {
+        width      : 3.6rem;
+        height     : 3.6rem;
+        margin-left: -1.8rem;
+        left       : 50%;
+        top        : 50%;
+        margin-top : -1.8rem;
+        animation  : orbit 3.5s linear infinite;
+        animation  : orbit 3.5s linear infinite;
+      }
+
+      .uranus:before {
+        background: #10c593;
+        top       : -0.08rem;
+        height    : 0.15rem;
+        width     : 0.15rem;
+      }
+
+      .neptune {
+        width      : 4rem;
+        height     : 4rem;
+        margin-left: -2rem;
+        left       : 50%;
+        top        : 50%;
+        margin-top : -2rem;
+        animation  : orbit 4s linear infinite;
+        animation  : orbit 4s linear infinite;
+      }
+
+      .neptune:before {
+        background: #1470e4;
+        top       : -0.08rem;
+        height    : 0.15rem;
+        width     : 0.15rem;
+      }
+
+      @keyframes orbit {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        50% {
+          transform: rotate(-180deg);
+        }
+
+        100% {
+          transform: rotate(-360deg);
+        }
+      }
+
+      @keyframes glow {
+        0% {
+          box-shadow: none;
+        }
+
+        50% {
+          background: #ffeb00;
+          box-shadow: 0 0 0.2rem orange;
+        }
+
+        100% {
+          box-shadow: none;
+        }
+      }
+    }
+
+    .tips {
+      position  : absolute;
+      bottom    : 0.3rem;
+      width     : 100%;
+      text-align: center;
+      height    : 0.5rem;
+      font-size : 0.22rem;
+
+      .words {
+        width        : 2rem;
+        height       : 0.5rem;
+        line-height  : 0.5rem;
+        margin       : 0 auto;
+        border-radius: 0.2rem;
+      }
+
+      .cancel {
+        background: #e78;
+        cursor    : pointer;
+      }
+
+      .continue {
+        background    : #333;
+        pointer-events: none;
+      }
+    }
+  }
+
+  .box2 {
+    width        : 6rem;
+    height       : 6rem;
+    background   : rgba(90, 94, 94, 0.5);
+    border-radius: 0.8rem;
+    position     : relative;
+
+    .loader2 {
+      margin    : 0 auto;
+      margin-top: 1rem;
+      position  : relative;
+      width     : 100px;
+      height    : 100px;
+    }
+
+    .loader2 i {
+      border-style : solid;
+      display      : inline-block;
+      box-sizing   : border-box;
+      border-width : 50px;
+      border-color : rgba(255, 255, 255, 1);
+      border-radius: 50px;
+      animation    : blink 1.5s infinite ease-in-out;
+      height       : 100px;
+      width        : 100px;
+    }
+
+    @keyframes blink {
+      50% {
+        border-width: 0;
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+
+      100% {
+        border-width: 0;
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+    }
+
+    .tips {
+      position  : absolute;
+      bottom    : 0.3rem;
+      width     : 100%;
+      text-align: center;
+      height    : 0.5rem;
+      font-size : 0.22rem;
+
+      .words {
+        width        : 2rem;
+        height       : 0.5rem;
+        line-height  : 0.5rem;
+        margin       : 0 auto;
+        border-radius: 0.2rem;
+      }
+
+      .cancel {
+        background: #e78;
+        cursor    : pointer;
+      }
+
+      .continue {
+        background    : #333;
+        pointer-events: none;
+      }
+    }
+  }
+}
