@@ -17,6 +17,9 @@ module.exports = {
       ['@babel/plugin-proposal-decorators', { legacy: true }],
     ],
   },
+  devServer: {
+    port: '3001',
+  },
   plugins: [
     {
       plugin: CracoLessPlugin,

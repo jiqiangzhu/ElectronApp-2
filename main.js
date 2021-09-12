@@ -29,7 +29,7 @@ app.on('ready', () => {
   });
 
   mainWindow.setMenu(null);
-  const urlLocation = isDev ? 'http://localhost:3000' : 'dummyurl';
+  const urlLocation = isDev ? 'http://localhost:3001' : 'dummyurl';
   mainWindow.loadURL(urlLocation);
   mainWindow.setMaximizable(true);
   mainWindow.on('maximize', () => {

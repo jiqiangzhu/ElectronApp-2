@@ -54,8 +54,19 @@ const windowUtils = {
    */
   openFolder: async function (path, resolve) {
     await ipcRenderer.send('openFolder', path);
-    ipcRenderer.once('asynchronous-reply', resolve);
+    ipcRenderer.on('asynchronous-reply', resolve);
   },
+
+  /**
+   * control music play state by shortcups
+   * @param {*} path
+   * @param {*} resolve
+   */
+   controlMusicState: async function (resolve) {
+     console.log('received');
+    ipcRenderer.on('controlMusicState', resolve);
+  },
+
   /**
    * check network
    * @returns net connect ? true : false

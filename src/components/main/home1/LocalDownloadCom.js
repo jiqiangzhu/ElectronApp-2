@@ -1,8 +1,7 @@
 import React from 'react'
-import { Layout, Button, Table, Tag } from 'antd'
+import { Layout, Button, Table, Tag, Row, Col, Space } from 'antd'
 import './index.less'
 import { CaretRightOutlined, createFromIconfontCN } from '@ant-design/icons'
-import { Row, Col, Space } from 'antd'
 
 const IconFont = createFromIconfontCN()
 const { Content, Header } = Layout
@@ -25,7 +24,7 @@ export default class LocalDownloadCom extends React.Component {
   }
   openDialog = async (path = 'D:\\programfile\\KuGou') => {
     await ipcRenderer.send('openFolder', path)
-    ipcRenderer.once('asynchronous-reply', (event, arg) => {
+    ipcRenderer.on('asynchronous-reply', (event, arg) => {
       console.log(arg)
       this.readMusicDir(arg.filePaths[0])
       localStorage.defaultMusicPath = arg.filePaths[0]

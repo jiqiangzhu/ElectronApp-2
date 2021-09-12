@@ -16,7 +16,6 @@ function AppCom(props) {
   let [loadingFlag, setLoadingFlag] = useState(true);
   const [RenderCom, setRenderCom] = useState('');
   const { showLoading } = props;
-
   useEffect(() => {
     setTimeout(async () => {
       setLoadingFlag(false);
@@ -29,7 +28,6 @@ function AppCom(props) {
     initRequset();
     ipcRendererUtil();
   }, []);
-
   useEffect(() => {
     setRenderCom(showLoading ? <LoadingCom show={true} /> : '');
   }, [showLoading]);
