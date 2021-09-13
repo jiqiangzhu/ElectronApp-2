@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import Clock from 'src/components/main/canvas';
-import TearClothe from 'src/components/main/canvas/tear-clothe';
+import TearClothe from 'src/components/main/tear-clothe';
 import { ChinaMapCom } from 'src/components/main/echarts';
 import LeaderBoard from 'src/components/main/leader-board';
 import MenuBar from 'src/components/main/menu-bar';
