@@ -6,7 +6,7 @@ $ctaHeight: 2.5rem;
         width           : 100%;
         // max-width: 1140px;
         margin          : 0 auto;
-        background-color: #000;
+        // background-color: #000;
         overflow        : hidden;
 
         .cta-singular-cell {
@@ -73,79 +73,6 @@ $ctaHeight: 2.5rem;
         }
     }
 
-    // Images
-    .image-1 {
-        background-image: url(../../../assets/img/rank/18.jpg);
-    }
-
-    .image-2 {
-        background-image: url(../../../assets/img/rank/16.jpg);
-    }
-
-    .image-3 {
-        background-image: url(../../../assets/img/rank/15.jpg);
-    }
-
-    .image-4 {
-        background-image: url(../../../assets/img/rank/14.jpg);
-    }
-
-    .image-5 {
-        background-image: url(../../../assets/img/rank/13.jpg);
-    }
-
-    .image-6 {
-        background-image: url(../../../assets/img/rank/17.jpg);
-    }
-
-    .image-7 {
-        background-image: url(../../../assets/img/rank/11.jpg);
-    }
-
-    .image-8 {
-        background-image: url(../../../assets/img/rank/9.jpg);
-    }
-
-    .image-9 {
-        background-image: url(../../../assets/img/rank/12.jpg);
-    }
-
-    .image-10 {
-        background-image: url(../../../assets/img/rank/10.jpg);
-    }
-
-    .image-11 {
-        background-image: url(../../../assets/img/rank/7.jpg);
-    }
-
-    .image-12 {
-        background-image: url(../../../assets/img/rank/8.jpg);
-    }
-
-    .image-13 {
-        background-image: url(../../../assets/img/rank/5.jpg);
-    }
-
-    .image-14 {
-        background-image: url(../../../assets/img/rank/2.jpg);
-    }
-
-    .image-15 {
-        background-image: url(../../../assets/img/rank/4.jpg);
-    }
-
-    .image-16 {
-        background-image: url(../../../assets/img/rank/3.jpg);
-    }
-
-    .image-17 {
-        background-image: url(../../../assets/img/rank/1.jpg);
-    }
-
-    .image-18 {
-        background-image: url(../../../assets/img/rank/6.jpg);
-    }
-
     // Animation images
     .cta-singular-cell {
         perspective: 10rem;
@@ -188,6 +115,7 @@ $ctaHeight: 2.5rem;
                 position: absolute;
                 top     : 0;
                 left    : 0;
+                border-radius: 0.08rem;
             }
 
             .cta-even-image {

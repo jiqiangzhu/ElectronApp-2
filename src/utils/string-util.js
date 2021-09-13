@@ -38,4 +38,17 @@ function getRandomCode(length) {
   }
 }
 
-export { getRandomCode };
+function getRandomNumber(length) {
+  if (length > 0) {
+    let data = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    let number = '';
+    for (let i = 0; i < length; i++) {
+      let r = parseInt(Math.random() * 9);
+      number += data[r];
+    }
+    return number | 0;
+  } else {
+    return 0;
+  }
+}
+export { getRandomCode, getRandomNumber };

@@ -39,79 +39,6 @@
       }
     }
 
-    // All selected images
-    .photo-1 {
-      background-image: url(../../../assets/img/animation/18.jpg);
-    }
-
-    .photo-2 {
-      background-image: url(../../../assets/img/animation/16.jpg);
-    }
-
-    .photo-3 {
-      background-image: url(../../../assets/img/animation/15.jpg);
-    }
-
-    .photo-4 {
-      background-image: url(../../../assets/img/animation/14.jpg);
-    }
-
-    .photo-5 {
-      background-image: url(../../../assets/img/animation/13.jpg);
-    }
-
-    .photo-6 {
-      background-image: url(../../../assets/img/animation/17.jpg);
-    }
-
-    .photo-7 {
-      background-image: url(../../../assets/img/animation/11.jpg);
-    }
-
-    .photo-8 {
-      background-image: url(../../../assets/img/animation/9.jpg);
-    }
-
-    .photo-9 {
-      background-image: url(../../../assets/img/animation/12.jpg);
-    }
-
-    .photo-10 {
-      background-image: url(../../../assets/img/animation/10.jpg);
-    }
-
-    .photo-11 {
-      background-image: url(../../../assets/img/animation/7.jpg);
-    }
-
-    .photo-12 {
-      background-image: url(../../../assets/img/animation/8.jpg);
-    }
-
-    .photo-13 {
-      background-image: url(../../../assets/img/animation/5.jpg);
-    }
-
-    .photo-14 {
-      background-image: url(../../../assets/img/animation/2.jpg);
-    }
-
-    .photo-15 {
-      background-image: url(../../../assets/img/animation/4.jpg);
-    }
-
-    .photo-16 {
-      background-image: url(../../../assets/img/animation/3.jpg);
-    }
-
-    .photo-17 {
-      background-image: url(../../../assets/img/animation/1.jpg);
-    }
-
-    .photo-18 {
-      background-image: url(../../../assets/img/animation/6.jpg);
-    }
-
     // Every row
     .animation-1 {
       animation: scroller 40s linear infinite;
@@ -122,37 +49,38 @@
         animation-play-state: paused;
       }
     }
-  }
-}
 
-.animation-2 {
-  margin-left: 1.5rem;
-  animation  : scroller 30s linear infinite;
-  display    : flex;
-  width      : calc(3.8rem * 12);
-}
+    // Every row
+    .animation-2 {
+      animation: scroller 40s linear infinite;
+      display  : flex;
+      width    : calc(3.8rem * 12);
 
-.animation-2:hover {
-  animation-play-state: paused;
-}
+      &:hover {
+        animation-play-state: paused;
+      }
+    }
 
-.animation-3 {
-  animation: scroller 50s linear infinite;
-  display  : flex;
-  width    : calc(3.8rem * 12);
-}
+    // Every row
+    .animation-3 {
+      animation: scroller 40s linear infinite;
+      display  : flex;
+      width    : calc(3.8rem * 12);
 
-.animation-3:hover {
-  animation-play-state: paused;
-}
-
-// Animations
-@keyframes scroller {
-  0% {
-    transform: translateX(0);
+      &:hover {
+        animation-play-state: paused;
+      }
+    }
   }
 
-  100% {
-    transform: translateX(calc(-3.8rem * 6));
+  // Animations
+  @keyframes scroller {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(calc(-3.8rem * 6));
+    }
   }
 }

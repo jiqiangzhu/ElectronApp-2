@@ -1,0 +1,15 @@
+.flex(@x: center, @y: center) {
+    justify-content: @x;
+    align-items    : @y;
+}
+
+@wid2: 2rem;
+@hei3: 3rem;
+
+.rank-content {
+    .demo {
+        width   : @wid2;
+        height  : @hei3;
+        .flex(@x: flex-start)
+    }
+}

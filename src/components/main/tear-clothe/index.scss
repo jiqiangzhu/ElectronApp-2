@@ -59,13 +59,14 @@
       }
     }
 
+    .tear {
+      // cursor: url('./tear.ico'), auto;
+    }
+
     .ant-slider-mark-text {
       color: #fff;
     }
-  }
 
-  .tear {
-    cursor: pointer;
   }
 
   @keyframes scroller1 {

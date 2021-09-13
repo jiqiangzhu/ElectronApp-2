@@ -4,6 +4,8 @@ import { Button, Slider } from 'antd';
 import Api from 'src/api';
 import store from 'src/redux';
 import { setShowLoaingRedux } from 'src/redux/actions/play-actions';
+import iconPath from 'src/assets/img/ico/tear.ico';
+import iconPath1 from 'src/assets/img/ico/tear1.ico';
 
 class TearClothe extends React.Component {
   constructor(props) {
@@ -14,11 +16,17 @@ class TearClothe extends React.Component {
       img2: '',
       radius: 20,
       imgArr: [],
-      index: 0, //奇数展示，偶数不展示
+      index: this.getRandomNumber(14), //奇数展示，偶数不展示
       sliderContent: '',
     };
     this.canvasRef = React.createRef();
   }
+  
+  getRandomNumber(max=10) {
+    let num = Math.random() * max | 0;
+    return !(num % 2) ? num : num + 1;
+  }
+
   clear = (e) => {
     try {
       if (this.state.down) {
@@ -41,6 +49,7 @@ class TearClothe extends React.Component {
     }
   };
   change = (index = 0) => {
+    console.log('index', index);
     try {
       store.dispatch(setShowLoaingRedux(true));
       setTimeout(() => {
@@ -74,7 +83,7 @@ class TearClothe extends React.Component {
       this.setState({
         imgArr: result.data.data,
       });
-      this.change();
+      this.change(this.state.index);
       let content1 = this.state.imgArr.map((item, index) => {
         let res = '';
         if (index % 2 === 0) {
@@ -119,7 +128,7 @@ class TearClothe extends React.Component {
         <div className="home-content tear-clothe">
           <div className="menu">
             <div className="slider-img">
-              <div className="photo-container">
+              <div className="photo-container cannotselect">
                 <div className="photo-cont-item animation-1">{this.state.sliderContent}</div>
               </div>
             </div>
@@ -165,6 +174,9 @@ class TearClothe extends React.Component {
           <canvas
             id="tear"
             className="tear"
+            style={{
+              cursor: `url(${this.state.radius > 20 ? iconPath : iconPath1}), auto`
+            }}
             width="320"
             height="480"
             ref={this.canvasRef}

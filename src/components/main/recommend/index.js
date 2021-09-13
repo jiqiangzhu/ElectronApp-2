@@ -20,7 +20,7 @@ function Recommend(props) {
         console.warn('e>>>>>>>>>>', e)
       }
     }
-    fetchData()
+    fetchData();
   }, [])
 
   return (

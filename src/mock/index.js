@@ -1,4 +1,5 @@
 import Mock from 'mockjs';
+import { getRandomCode, getRandomNumber } from '@/utils/string-util';
 
 Mock.setup({
   timeout: '1000-1500',
@@ -551,3 +552,35 @@ Mock.mock('/tear/clothe', 'get', () => {
     ],
   };
 });
+
+// get movie photo
+Mock.mock('/movie/photo', 'get', () => {
+  let arr = [];
+  for (let i = 1; i < 19; i++) {
+    arr.push({
+      "default": require(`@/assets/img/movie/${i}.jpg`),
+      "key": getRandomCode(10),
+      "number": getRandomNumber(5)
+    })
+  }
+  return {
+    photoList: arr
+  }
+})
+
+// get cool switch photo 
+Mock.mock('/rank/photo', 'get', () => {
+  let arr = [];
+  for (let i = 1; i <= 30; i++) {
+    arr.push({
+      "default": require(`@/assets/img/recommend/${i}.jpg`),
+      "key": getRandomCode(10),
+      "number": Math.random() * 6 | 0
+    })
+  }
+  
+  return {
+    photoList: arr
+  }
+
+})
