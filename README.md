@@ -12,11 +12,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 在package.json当中并没有添加两者
 
 In the project directory, you can run:
-### ssh `git clone git@github.com:jiqiangzhu/ElectronApp.git`
-### https `git clone https://github.com/jiqiangzhu/ElectronApp.git`
-### `cd ElectronApp`
-### `npm install`
-### `yarn dev`
+```bash
+ssh
+    git clone git@github.com:jiqiangzhu/ElectronApp.git
+https
+    git clone https://github.com/jiqiangzhu/ElectronApp.git
+cd ElectronApp
+npm install
+yarn dev
+```
 
 Runs the app in the development mode.\
 

@@ -6,6 +6,7 @@ import './index.less';
 function Loading(props) {
   const { showLoading, setShowLoading } = props;
   const [showTips, setShowTips] = useState(props.show);
+  const [loadingMode] = useState(localStorage.loadingMode ?? "1");
   useEffect(() => {
     const timer = setTimeout(() => {
       function init() {
@@ -19,7 +20,7 @@ function Loading(props) {
   }, [showTips]);
   return (
     <div className="loading cannotselect" style={{ display: showLoading ? 'flex' : 'none' }}>
-      <div className="box1" style={{ display: localStorage.loadingMode === '1' ? 'block' : 'none' }}>
+      <div className="box1" style={{ display: loadingMode === '1' ? 'block' : 'none' }}>
         <div className="solar">
           <i className="mercury"></i>
           <i className="venus"></i>
@@ -37,7 +38,7 @@ function Loading(props) {
           </div>
         </div>
       </div>
-      <div className="box2" style={{ display: localStorage.loadingMode === '2' ? 'block' : 'none' }}>
+      <div className="box2" style={{ display: loadingMode === '2' ? 'block' : 'none' }}>
         <div className="loader2">
           <i></i>
         </div>
