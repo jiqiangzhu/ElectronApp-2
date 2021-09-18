@@ -32,8 +32,6 @@ function LeaderBoard(props) {
         // })
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-
-
     return (
         <div className="home-content rank-content" ref={rankRef}>
             <div className="cta-container-images">

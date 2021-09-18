@@ -107,6 +107,7 @@ function FooterCom(props) {
     let reducer = store.getState().playReducer;
     let listLen = store.getState().playReducer.musicList.length;
     let currIndex = store.getState().playReducer.currentIndex;
+    console.log('currIndex============', currIndex);
     if (listLen <= 0) {
       message.error({
         content: 'music list is null',
@@ -138,7 +139,16 @@ function FooterCom(props) {
         let tempIndex = commonUtils.randomInteger(currIndex, listLen);
         store.dispatch(currentIndexRedux(tempIndex, audioRef.current));
       }
-
+      setPopupList(() =>
+        fileNameArray.map((item, ind) => {
+          return (
+            <p onDoubleClick={() => playMusicByPopupList(ind)} key={ind}
+              className={ind === store.getState().playReducer.currentIndex ? 'music-active' : ''}>
+              {item.indexOf('.mp3') !== -1 ? item.substr(0, item.indexOf('.mp3')) : item}
+            </p>
+          );
+        })
+      );
       if (reducer.currentAudio && reducer.playFlag === 'play') {
         reducer.currentAudio.play();
       }
@@ -223,7 +233,8 @@ function FooterCom(props) {
           setPopupList(() =>
             musicList.map((item, index) => {
               return (
-                <p onDoubleClick={() => playMusicByPopupList(index)} key={index} className={index === store.getState().playReducer.currentIndex ? 'music-active' : ''}>
+                <p onDoubleClick={() => playMusicByPopupList(index)} key={index}
+                  className={index === store.getState().playReducer.currentIndex ? 'music-active' : ''}>
                   {item.indexOf('.mp3') !== -1 ? item.substr(0, item.indexOf('.mp3')) : item}
                 </p>
               );
@@ -252,7 +263,8 @@ function FooterCom(props) {
       setPopupList(() =>
         fileNameArray.map((item, ind) => {
           return (
-            <p onDoubleClick={() => playMusicByPopupList(ind)} key={ind} className={ind === store.getState().playReducer.currentIndex ? 'music-active' : ''}>
+            <p onDoubleClick={() => playMusicByPopupList(ind)} key={ind}
+              className={ind === store.getState().playReducer.currentIndex ? 'music-active' : ''}>
               {item.indexOf('.mp3') !== -1 ? item.substr(0, item.indexOf('.mp3')) : item}
             </p>
           );
@@ -276,7 +288,11 @@ function FooterCom(props) {
   };
   return (
     <div className="footer">
-      <audio onTimeUpdate={updateTime.bind(this)} onError={playMusic.bind(this, 'pause')} ref={audioRef} preload="true" loop={playMode === '2' ? true : false} controls={false} onEnded={playNext.bind(this, 1)} src={currentSrc} onCanPlay={getDuration.bind(this)}></audio>
+      <audio onTimeUpdate={updateTime.bind(this)}
+        onError={playMusic.bind(this, 'pause')}
+        ref={audioRef} preload="true"
+        loop={playMode === '2' ? true : false} controls={false}
+        onEnded={playNext.bind(this, 1)} src={currentSrc} onCanPlay={getDuration.bind(this)}></audio>
       <Row align="middle" style={{ width: '100%' }}>
         <Col span={3}>
           <Space size={10}>

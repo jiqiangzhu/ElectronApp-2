@@ -92,7 +92,7 @@ const ChinaMap = {
       // }
       isFileExist = true;
       // (toady or net avaliable) and file exist, load local file
-      fydata = await ChinaMap.getFyData(isFileExist, netValid);
+      fydata = ChinaMap.getFyData(isFileExist, netValid);
       // set last update time in redux
       store.dispatch(updateMapRedux(commonUtils.dateTimeFormat(fydata.data.data.cachetime)));
       let dataList;

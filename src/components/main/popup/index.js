@@ -30,17 +30,25 @@ function MusicList(props) {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <>
-      <Drawer title="Music List" placement="right" closable={false} onClose={() => props.onClose()} visible={props.visible} headerStyle={{ color: '#FFFFFF' }} className="webkit-no-drag cannotselect">
+      <Drawer title="Music List" placement="right" closable={false} onClose={() => props.onClose()}
+        visible={props.visible} headerStyle={{ color: '#FFFFFF' }}
+        className="webkit-no-drag cannotselect">
         <div ref={popupRef} className="my-content music-popup">
           <Content>
             <List
               dataSource={props.musicDom}
               renderItem={(item, index) => {
                 return (
-                  <List.Item key={index} className={index === currentIndex && item.props.children.byteLength() >= 24 ? 'list-item' : ''}>
+                  <List.Item key={index} className={index === currentIndex && item.props.children.byteLength() >= 24
+                    ? 'list-item' : ''}>
                     <Tooltip title={item} placement="left">
                       {item}
-                      <p className="music-active" style={{ display: props.musicList[index].byteLength() >= 24 ? 'inline-block' : 'none' }}>
+                      <p className="music-active"
+                        style={{
+                          display: props.musicList[index].byteLength() >= 24
+                            ? 'inline-block'
+                            : 'none'
+                        }}>
                         {props.musicList[index]}
                       </p>
                     </Tooltip>
