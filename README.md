@@ -48,4 +48,7 @@ Runs the app in the development mode.\
 git add 大于40M的文件名
 ```
 
+# 预览
+
+![image-20210920172037987](https://github.com/blairq-coding/ElectronApp/blob/master/docs/img/recommend.png)
 

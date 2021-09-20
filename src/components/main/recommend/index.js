@@ -12,7 +12,8 @@ function Recommend(props) {
         const result = await Api.get('/home/recommend')
         console.log('result', result)
         if (result && result.data && result.data.data) {
-          const data = result.data.data
+          const data = result.data.data;
+          console.log('data>>>>>>>>>', data);
           setImgPathArr(data)
         } else {
           throw new Error(result.data)
@@ -31,7 +32,10 @@ function Recommend(props) {
           {imgPathArr.map((item, index) => {
             return (
               <Col key={index} xs={{ span: 4, offset: 1 }} lg={{ span: 5, offset: 1 }}>
-                <Image src={item} />
+                <Image src={item.real}
+                  preview={{
+                    src: item.default
+                  }} />
               </Col>
             )
           })}
