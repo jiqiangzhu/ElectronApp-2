@@ -4,13 +4,17 @@ import { setShowLoaingRedux } from 'src/redux/actions/play-actions';
 
 //  url = `https://interface.sina.cn/news/wap/fymap2020_data.d.json`
 
-// 拦截器
+axios.defaults.timeout = 30000;
+
+// request 拦截器
 axios.interceptors.request.use((config) => {
   // open loading popup
   store.dispatch(setShowLoaingRedux(true));
   return config;
 });
-// 拦截器
+
+
+// response 拦截器
 axios.interceptors.response.use((config) => {
   // close loading popup
   store.dispatch(setShowLoaingRedux(false));

@@ -1,7 +1,8 @@
-import { Row, Col, Image } from 'antd'
-import { useEffect, useState } from 'react'
-import Api from 'src/api'
-import './index.less'
+import { Row, Col, Image } from 'antd';
+import { useEffect, useState } from 'react';
+import Api from 'src/api';
+import './index.less';
+
 
 function Recommend(props) {
   const [imgPathArr, setImgPathArr] = useState([])

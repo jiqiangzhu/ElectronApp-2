@@ -21,8 +21,8 @@ class TearClothe extends React.Component {
     };
     this.canvasRef = React.createRef();
   }
-  
-  getRandomNumber(max=10) {
+
+  getRandomNumber(max = 10) {
     let num = Math.random() * max | 0;
     return !(num % 2) ? num : num + 1;
   }
@@ -153,11 +153,7 @@ class TearClothe extends React.Component {
                   marginLeft: 70
                 }}
               >
-                <Slider
-                  vertical
-                  defaultValue={this.state.radius}
-                  min={10}
-                  max={30}
+                <Slider vertical defaultValue={this.state.radius} min={10} max={30}
                   marks={{
                     10: '10 Size',
                     30: 30,
@@ -171,16 +167,10 @@ class TearClothe extends React.Component {
               </div>
             </div>
           </div>
-          <canvas
-            id="tear"
-            className="tear"
-            style={{
-              cursor: `url(${this.state.radius > 20 ? iconPath : iconPath1}), auto`
-            }}
-            width="320"
-            height="480"
-            ref={this.canvasRef}
-            onMouseDown={() =>
+          <canvas id="tear" className="tear" style={{
+            cursor: `url(${this.state.radius > 20 ? iconPath : iconPath1}), auto`
+          }}
+            width="320" height="480" ref={this.canvasRef} onMouseDown={() =>
               this.setState({
                 down: true,
               })
@@ -191,7 +181,7 @@ class TearClothe extends React.Component {
                 down: false,
               })
             }
-          ></canvas>
+          >您的浏览器不支持Canvas</canvas>
         </div>
       </>
     );

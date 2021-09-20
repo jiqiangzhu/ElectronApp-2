@@ -2,7 +2,7 @@ import Mock from 'mockjs';
 import { getRandomCode, getRandomNumber } from '@/utils/string-util';
 
 Mock.setup({
-  timeout: '1000-1500',
+  timeout: '800-1000',
 });
 
 Mock.mock('/user/details', 'get', () => {
@@ -578,7 +578,7 @@ Mock.mock('/rank/photo', 'get', () => {
       "number": Math.random() * 6 | 0
     })
   }
-  
+
   return {
     photoList: arr
   }

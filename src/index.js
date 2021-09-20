@@ -5,7 +5,6 @@ import './mock/index';
 import store from './redux';
 import { Provider } from 'react-redux';
 import React from 'react';
-
 /**
  * entry
  */
