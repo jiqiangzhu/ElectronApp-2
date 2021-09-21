@@ -36,7 +36,7 @@ function FooterCom(props) {
   useEffect(() => {
     function init() {
       if (localStorage.defaultMusicPath) {
-        readDir('init', localStorage.defaultMusicPath);
+        readDir(localStorage.defaultMusicPath);
       }
       audioRef.current.currentTime = localStorage.currentTime ? localStorage.currentTime : 0;
     }
@@ -287,7 +287,7 @@ function FooterCom(props) {
     }
   };
   return (
-    <div className="footer">
+    <div className="footer webkit-no-drag">
       <audio onTimeUpdate={updateTime.bind(this)}
         onError={playMusic.bind(this, 'pause')}
         ref={audioRef} preload="true"
@@ -296,9 +296,9 @@ function FooterCom(props) {
       <Row align="middle" style={{ width: '100%' }}>
         <Col span={3}>
           <Space size={10}>
-            <StepBackwardOutlined onClick={playNext.bind(this, -1)} style={{ fontSize: '24px', cursor: 'pointer' }} />
+            <StepBackwardOutlined className="webkit-no-drag" onClick={playNext.bind(this, -1)} style={{ fontSize: '24px', cursor: 'pointer' }} />
             <PlayStatusCom playStatus={store.getState().playReducer.playFlag} onClick={playMusic.bind(this)} />
-            <StepForwardOutlined onClick={playNext.bind(this, 1)} style={{ fontSize: '24px', cursor: 'pointer' }} />
+            <StepForwardOutlined onClick={playNext.bind(this, 1)} style={{ fontSize: '24px', cursor: 'pointer' }} className="webkit-no-drag" />
           </Space>
         </Col>
         <span ref={beginRef} style={{ paddingBottom: '10px', paddingRight: '10px' }} className="cannotselect">
