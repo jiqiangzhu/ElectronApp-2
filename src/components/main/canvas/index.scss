@@ -1,32 +1,43 @@
-.canvas-box {
-    width          : 500px;
-    height         : 500px;
-    display        : inline-flex;
+$width: 480px;
+
+.clock {
+    display        : flex;
     justify-content: center;
-    align-items    : center;
-    border-radius  : 250px;
-    box-shadow     : 2px 2px 5px 10px #3b3f4dc1;
-    margin         : 20px 0 0 20px;
+    margin-right   : 3rem;
+
+    .canvas-box {
+        width            : $width;
+        filter           : brightness(60%);
+        height           : $width;
+        display          : inline-flex;
+        justify-content  : center;
+        align-items      : center;
+        border-radius    : $width / 2;
+        box-shadow       : 2px 2px 5px 5px #9b9da5c1;
+        margin           : 20px 0 0 20px;
+        background-repeat: no-repeat;
+        background-size  : auto 100%;
+
+        #clock {
+            border-radius: $width / 2;
+        }
+
+        // animation : clock 10s linear infinite;
+
+    }
+
 
     #clock {
-        border-radius: 240px;
-    }
-}
-
-.canvas-box:hover {
-    animation-play-state: paused;
-}
-
-// #clock {
-//     transform: rotateZ(-90deg);
-//     transform-origin: center;
-// }
-@keyframes clock {
-    0% {
-        transform: rotateY(0deg);
+        transform-origin: center;
     }
 
-    100% {
-        transform: rotateY(360deg);
+    @keyframes clock {
+        0% {
+            transform: rotateY(0deg);
+        }
+
+        100% {
+            transform: rotateY(360deg);
+        }
     }
 }

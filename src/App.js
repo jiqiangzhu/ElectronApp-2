@@ -34,6 +34,7 @@ function AppCom(props) {
 
   return (
     <Skeleton active loading={loadingFlag} rows={100}>
+      <div className="bg-gif"></div>
       <div className="main-content">{routes}</div>
       {RenderCom}
     </Skeleton>

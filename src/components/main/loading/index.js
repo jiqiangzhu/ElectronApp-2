@@ -57,6 +57,7 @@ const mapStateToProps = (state) => {
     showLoading: state.playReducer.showLoading,
   };
 };
+
 const mapDispatchToProps = (dispatch) => {
   return {
     setShowLoading: (showLoading) => {
@@ -64,6 +65,7 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
+
 const LoadingCom = connect(mapStateToProps, mapDispatchToProps)(Loading);
 
 export default LoadingCom;

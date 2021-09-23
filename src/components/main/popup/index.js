@@ -1,6 +1,7 @@
 import { List, Drawer, Layout, Tooltip } from 'antd';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { musicListRedux, musicNameRedux } from 'src/redux/actions/play-actions';
 import './index.scss';
 
 const { Content } = Layout;
@@ -10,7 +11,7 @@ const { Content } = Layout;
  * @returns react dom
  */
 function MusicList(props) {
-  const { currentIndex } = props;
+  const { currentIndex, fileFullPath, setFileFullPath, musicNameList, setMusicNameList } = props;
   const popupRef = React.createRef();
   // useEffect(() => {
   //   function updateScroll() {
@@ -25,15 +26,33 @@ function MusicList(props) {
   //   }
   //   updateScroll()
   // }, [popupRef, props])
+
   useEffect(() => {
-    console.log('fileNameArray', props.musicList);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    console.log('fileNameArray=======', props.musicList);
+  }, [props.musicNameList]); // eslint-disable-line react-hooks/exhaustive-deps
+  const addNewFile = (e) => {
+    try {
+      e.preventDefault();
+      console.log('musicNameList===========', musicNameList);
+      const file = e.dataTransfer.files[0];
+      setFileFullPath(fileFullPath.concat(file.path));
+      const newList = musicNameList.concat(file.name);
+      setMusicNameList(newList);
+    } catch (err) {
+      console.warn('error in music popup :\n', err);
+    }
+  }
   return (
     <>
       <Drawer title="Music List" placement="right" closable={false} onClose={() => props.onClose()}
         visible={props.visible} headerStyle={{ color: '#FFFFFF' }}
         className="webkit-no-drag cannotselect">
-        <div ref={popupRef} className="my-content music-popup">
+        <div ref={popupRef} className="my-content music-popup"
+          onDragOver={(e) => {
+            e.preventDefault();
+            // console.log();
+          }}
+          onDrop={(e) => { addNewFile.call(this, e) }}>
           <Content>
             <List
               dataSource={props.musicDom}
@@ -66,9 +85,22 @@ function MusicList(props) {
 const mapStateToProps = (state) => {
   return {
     currentIndex: state.playReducer.currentIndex,
+    musicNameList: state.playReducer.musicNameList,
+    fileFullPath: state.playReducer.musicList
   };
 };
 
-const MusicListPopup = connect(mapStateToProps)(MusicList);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setMusicNameList: (nameList) => {
+      dispatch(musicNameRedux(nameList));
+    },
+    setFileFullPath: (musicList) => {
+      dispatch(musicListRedux(musicList))
+    }
+  };
+};
+
+const MusicListPopup = connect(mapStateToProps, mapDispatchToProps)(MusicList);
 
 export default MusicListPopup;

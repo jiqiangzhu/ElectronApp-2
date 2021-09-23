@@ -53,8 +53,12 @@ const windowUtils = {
    * @param {*} resolve
    */
   openFolder: async function (path, resolve) {
-    await ipcRenderer.send('openFolder', path);
-    ipcRenderer.on('asynchronous-reply', resolve);
+    try {
+      await ipcRenderer.send('openFolder', path);
+      ipcRenderer.on('asynchronous-reply', resolve);
+    } catch (err) {
+      console.warn(err);
+    }
   },
 
   /**
@@ -62,8 +66,7 @@ const windowUtils = {
    * @param {*} path
    * @param {*} resolve
    */
-   controlMusicState: async function (resolve) {
-     console.log('received');
+  controlMusicState: async function (resolve) {
     ipcRenderer.on('controlMusicState', resolve);
   },
 

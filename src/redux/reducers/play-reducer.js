@@ -7,6 +7,7 @@ import {
   SelectKey,
   CurrentTime,
   ShowLoading,
+  MusicName,
 } from '../actions/play-actions';
 import initialState from '../state';
 
@@ -23,6 +24,14 @@ function playReducer(state = initialState, { type, payload } = {}) {
       return {
         ...state,
         musicList: payload.musicList,
+      };
+    }
+    case MusicName: {
+      // localStorage.removeItem("currentIndex")
+      console.log('payload.nameList========', payload.nameList);
+      return {
+        ...state,
+        musicNameList: payload.nameList,
       };
     }
     case CurrentIndex: {

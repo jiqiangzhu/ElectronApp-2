@@ -7,6 +7,7 @@ const NetValid = 'netValid';
 const SelectKey = 'selectKey';
 const CurrentTime = 'currentTime';
 const ShowLoading = 'showLoading';
+const MusicName = "musicName";
 
 // play pause music
 function playMusic(playFlag) {
@@ -50,12 +51,14 @@ function SelectKeyRedux(key) {
     payload: { key },
   };
 }
+
 function setCurrentTime(currentTime) {
   return {
     type: CurrentTime,
     payload: { currentTime },
   };
 }
+
 function setShowLoaing(showLoading) {
   return {
     type: ShowLoading,
@@ -63,9 +66,17 @@ function setShowLoaing(showLoading) {
   };
 }
 
+// show name
+function musicName(nameList) {
+  return {
+    type: MusicName,
+    payload: { nameList },
+  };
+}
 export {
   playMusic as playMusicRedux,
   musicList as musicListRedux,
+  musicName as musicNameRedux,
   currentIndex as currentIndexRedux,
   audioRef as audioRefRedux,
   checkNet as checkNetRedux,
@@ -81,4 +92,5 @@ export {
   SelectKey,
   CurrentTime,
   ShowLoading,
+  MusicName
 };
