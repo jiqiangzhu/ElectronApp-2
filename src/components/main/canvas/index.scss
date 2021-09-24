@@ -1,36 +1,39 @@
 $width: 480px;
 
 .clock {
+    position       : relative;
     display        : flex;
     justify-content: center;
     margin-right   : 3rem;
+    margin-top     : 0.4rem;
 
     .canvas-box {
         width            : $width;
-        filter           : brightness(60%);
+        filter           : brightness(75%) blur(2px);
         height           : $width;
         display          : inline-flex;
         justify-content  : center;
         align-items      : center;
         border-radius    : $width / 2;
         box-shadow       : 2px 2px 5px 5px #9b9da5c1;
-        margin           : 20px 0 0 20px;
         background-repeat: no-repeat;
         background-size  : auto 100%;
-
-        #clock {
-            border-radius: $width / 2;
-        }
 
         // animation : clock 10s linear infinite;
 
     }
 
+    #clock {
+        border-radius: $width / 2;
+        position     : absolute;
+    }
 
     #clock {
         transform-origin: center;
     }
-
+    .test {
+        background-color: #29303bc1;
+    }
     @keyframes clock {
         0% {
             transform: rotateY(0deg);

@@ -50,7 +50,6 @@ function MusicList(props) {
         <div ref={popupRef} className="my-content music-popup"
           onDragOver={(e) => {
             e.preventDefault();
-            // console.log();
           }}
           onDrop={(e) => { addNewFile.call(this, e) }}>
           <Content>
