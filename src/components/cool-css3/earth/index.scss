@@ -2,37 +2,33 @@
     width    : 3rem;
     height   : 3rem;
     position : absolute;
-    right    : 0.3rem;
+    right    : 0.5rem;
     top      : 1rem;
     transform: rotate(-20deg);
 
     &-main {
-        position: absolute;
-
+        position     : absolute;
         /* 背景图片在水平方向复制*/
-        /*下面的属性可使地球位于浏览器窗口垂直水平居中国*/
-        height         : 3rem;
-        width          : 3rem;
-        background     : url('../../../assets/img/content.png') repeat-x 0 0;
-        // border         : 1px solid rgba(26, 18, 101, 0.3);
+        height       : 3rem;
+        width        : 3rem;
         /*形成圆边效果，视觉效果更好，不用也行*/
-        border-radius  : 50%;
-        background-size: auto 100%;
+        border       : 1px solid rgba(26, 18, 101, 0.3);
+        border-radius: 50%;
         /*使地球形成圆形效果*/
-        box-shadow     : -0.08rem 0 0.25rem rgba(256, 256, 256, 0.3), -0.01rem -0.02rem 0.14rem rgba(256, 256, 256, 0.5) inset;
+        box-shadow   : -0.08rem 0 0.25rem rgba(256, 256, 256, 0.3), -0.01rem -0.02rem 0.14rem rgba(256, 256, 256, 0.5) inset;
         /*形成圆形外面的模糊月晕效*/
-        animation      : loop 5s linear infinite;
+        animation    : loop 5s linear infinite;
 
         &::before {
-            content         : "";
-            border-radius   : 50%;
+            content      : "";
+            border-radius: 50%;
             box-shadow   : -1rem -0.06rem 0.25rem rgba(0, 0, 0, 0.7) inset;
             /*弧形阴影，形成白天黑夜效果*/
-            left            : 0;
-            position        : absolute;
-            top             : 0;
-            height          : 3rem;
-            width           : 3rem;
+            left         : 0;
+            position     : absolute;
+            top          : 0;
+            height       : 3rem;
+            width        : 3rem;
         }
 
         // &::after {
@@ -52,10 +48,10 @@
             background-position: 0 0;
         }
 
+        /* 世界地图的大小为3rem，所以background-position-x: -6rem */
         100% {
             background-position: -6rem 0;
         }
 
-        /* 世界地图的大小为900*450，所以background-position-x: -900px */
     }
 }
