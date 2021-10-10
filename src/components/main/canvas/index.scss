@@ -1,32 +1,54 @@
-.canvas-box {
-    width          : 500px;
-    height         : 500px;
-    display        : inline-flex;
+$width: 480px;
+
+.clock {
+    position       : relative;
+    display        : flex;
     justify-content: center;
-    align-items    : center;
-    border-radius  : 250px;
-    box-shadow     : 2px 2px 5px 10px #3b3f4dc1;
-    margin         : 20px 0 0 20px;
+    margin-right   : 3rem;
+    margin-top     : 0.4rem;
+    // animation : clock 5s linear infinite;
+    // animation : clock-bg 2s linear infinite;
+
+    .canvas-box {
+        width            : $width;
+        filter           : brightness(75%) blur(2px);
+        height           : $width;
+        display          : inline-flex;
+        justify-content  : center;
+        align-items      : center;
+        border-radius    : $width / 2;
+        box-shadow       : 2px 2px 5px 5px #9b9da5c1;
+        background-repeat: no-repeat;
+        background-size  : auto 100%;
+    }
 
     #clock {
-        border-radius: 240px;
-    }
-}
-
-.canvas-box:hover {
-    animation-play-state: paused;
-}
-
-// #clock {
-//     transform: rotateZ(-90deg);
-//     transform-origin: center;
-// }
-@keyframes clock {
-    0% {
-        transform: rotateY(0deg);
+        border-radius: $width / 2;
+        position     : absolute;
+        transform-origin: center;
     }
 
-    100% {
-        transform: rotateY(360deg);
+    @keyframes clock {
+        0% {
+            transform: rotateY(0deg);
+        }
+
+        100% {
+            transform: rotateY(360deg);
+        }
+    }
+
+    @keyframes clock-bg {
+        0% {
+            background-color: transparent;
+        }
+
+        50% {
+            background-color: #4e6892c1;
+        }
+
+        100% {
+            background-color: transparent;
+        }
     }
 }

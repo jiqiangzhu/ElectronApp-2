@@ -1,5 +1,5 @@
-import { Result, Button } from 'antd'
-import './index.less'
+import { Result, Button } from 'antd';
+import './index.less';
 
 function NotFound(props) {
   return (
@@ -22,4 +22,4 @@ function NotFound(props) {
   )
 }
 
-export default NotFound
+export default NotFound;

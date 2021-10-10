@@ -1,96 +1,52 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Api from 'src/api';
 import './index.scss';
 
 function LeaderBoard(props) {
-    useEffect(() => { }, []);
+    const [photoList, setPhotoList] = useState([]);
+
+    useEffect(() => {
+        async function init() {
+            try {
+                const res = await Api.get('/rank/photo');
+                console.log('res', res);
+                if (res && res.data && res.data.photoList) {
+                    setPhotoList(res.data.photoList)
+                } else {
+                    throw new Error(`fetch rank img error`);
+                }
+            } catch (err) {
+                console.warn('err', err);
+            }
+        }
+        init();
+        return () => {
+            setPhotoList((state, callback) => {
+                return
+            })
+        }
+    }, []);
+
     return (
         <div className="home-content rank-content">
-            {/* <div className="cta-container-images">
-                <div className="cta-singular-cell">
-                    <div className="cta-internal-image-cont flip-1">
-                        <div className="cta-even-image image-1"></div>
-                        <div className="cta-odd-image image-2"></div>
-                    </div>
-                </div>
-
-                <div className="cta-singular-cell">
-                    <div className="cta-internal-image-cont flip-1">
-                        <div className="cta-even-image image-3"></div>
-                        <div className="cta-odd-image image-4"></div>
-                    </div>
-                </div>
-
-                <div className="cta-singular-cell">
-                    <div className="cta-internal-image-cont flip-2">
-                        <div className="cta-even-image image-5"></div>
-                        <div className="cta-odd-image image-6"></div>
-                    </div>
-                </div>
-
-                <div className="cta-singular-cell">
-                    <div className="cta-internal-image-cont flip-6">
-                        <div className="cta-even-image image-7"></div>
-                        <div className="cta-odd-image image-8"></div>
-                    </div>
-                </div>
-
-                <div className="cta-singular-cell">
-                    <div className="cta-internal-image-cont flip-3">
-                        <div className="cta-even-image image-9"></div>
-                        <div className="cta-odd-image image-10"></div>
-                    </div>
-                </div>
-
-                <div className="cta-singular-cell">
-                    <div className="cta-internal-image-cont flip-1">
-                        <div className="cta-even-image image-11"></div>
-                        <div className="cta-odd-image image-12"></div>
-                    </div>
-                </div>
-
-                <div className="cta-singular-cell">
-                    <div className="cta-internal-image-cont flip-4">
-                        <div className="cta-even-image image-13"></div>
-                        <div className="cta-odd-image image-14"></div>
-                    </div>
-                </div>
-
-                <div className="cta-singular-cell">
-                    <div className="cta-internal-image-cont flip-6">
-                        <div className="cta-even-image image-15"></div>
-                        <div className="cta-odd-image image-16"></div>
-                    </div>
-                </div>
-
-                <div className="cta-singular-cell">
-                    <div className="cta-internal-image-cont flip-5">
-                        <div className="cta-even-image image-17"></div>
-                        <div className="cta-odd-image image-18"></div>
-                    </div>
-                </div>
-
-                <div className="cta-singular-cell">
-                    <div className="cta-internal-image-cont flip-1">
-                        <div className="cta-even-image image-9"></div>
-                        <div className="cta-odd-image image-8"></div>
-                    </div>
-                </div>
-
-                <div className="cta-singular-cell">
-                    <div className="cta-internal-image-cont flip-3">
-                        <div className="cta-even-image image-4"></div>
-                        <div className="cta-odd-image image-5"></div>
-                    </div>
-                </div>
-
-                <div className="cta-singular-cell">
-                    <div className="cta-internal-image-cont flip-6">
-                        <div className="cta-even-image image-1"></div>
-                        <div className="cta-odd-image image-2"></div>
-                    </div>
-                </div>
-
-            </div> */}
+            <div className="cta-container-images">
+                {
+                    photoList.map((item, index) => {
+                        if (index <= 24 && index % 2) {
+                            return (
+                                <div className="cta-singular-cell" key={item.key}>
+                                    <div className={`cta-internal-image-cont flip-${item.number}`}>
+                                        <div className="cta-even-image" style={{ backgroundImage: `url(${item.default.default})` }}></div>
+                                        <div className="cta-odd-image" style={{ backgroundImage: `url(${photoList[index + 1].default.default})` }}></div>
+                                    </div>
+                                </div>
+                            )
+                        } else {
+                            return ""
+                        }
+                    })
+                }
+            </div>
         </div>
     );
 }

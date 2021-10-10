@@ -1,9 +1,11 @@
 import React from 'react';
-import './tear.scss';
+import './index.scss';
 import { Button, Slider } from 'antd';
 import Api from 'src/api';
 import store from 'src/redux';
 import { setShowLoaingRedux } from 'src/redux/actions/play-actions';
+import iconPath from 'src/assets/img/ico/tear.ico';
+import iconPath1 from 'src/assets/img/ico/tear1.ico';
 
 class TearClothe extends React.Component {
   constructor(props) {
@@ -14,11 +16,16 @@ class TearClothe extends React.Component {
       img2: '',
       radius: 20,
       imgArr: [],
-      index: 0, //奇数展示，偶数不展示
       sliderContent: '',
     };
     this.canvasRef = React.createRef();
   }
+
+  getRandomNumber(max = 10) {
+    let num = Math.random() * max | 0;
+    return !(num % 2) ? num : num + 1;
+  }
+
   clear = (e) => {
     try {
       if (this.state.down) {
@@ -41,6 +48,8 @@ class TearClothe extends React.Component {
     }
   };
   change = (index = 0) => {
+    index = !(index > 13 || index < 0) ? index : 0;
+    console.log('index', index);
     try {
       store.dispatch(setShowLoaingRedux(true));
       setTimeout(() => {
@@ -52,8 +61,7 @@ class TearClothe extends React.Component {
       img2.src = this.state.imgArr[index + 1].default;
       img1.onload = () => {
         this.setState({
-          img1: img1,
-          index: index,
+          img1: img1
         });
         this.canvasRef.current
           .getContext('2d')
@@ -64,18 +72,22 @@ class TearClothe extends React.Component {
           img2: img2,
         });
       };
-    } catch {
-      console.warn('warn or error in function change');
+    } catch (e) {
+      console.warn(`warn or error in function change:\n${e}`);
     }
   };
   async componentDidMount() {
     try {
       const result = await Api.get('/tear/clothe');
+      console.log('result.data.data====', result.data.data);
+      if (!result?.data?.data) {
+        throw new Error("get photo error");
+      }
+      const data = result.data.data;
       this.setState({
-        imgArr: result.data.data,
+        imgArr: data,
       });
-      this.change();
-      let content1 = this.state.imgArr.map((item, index) => {
+      let content1 = data.map((item, index) => {
         let res = '';
         if (index % 2 === 0) {
           res = (
@@ -92,34 +104,38 @@ class TearClothe extends React.Component {
         }
         return res;
       });
-      let content2 = this.state.imgArr.map((item, index) => {
-        let res = '';
-        if (index % 2 === 0) {
-          res = (
-            <div key={index + 100} className="photo-item" onClick={() => {
-              this.change(index);
-            }}
-            >
-              <img style={{ width: '1rem' }} src={item.default} alt="nothing" />
-            </div>
-          );
-        }
-        return res;
-      });
+      // let content2 = data.map((item, index) => {
+      //   let res = '';
+      //   if (index % 2 === 0) {
+      //     res = (
+      //       <div key={index + 100} className="photo-item" onClick={() => {
+      //         this.change(index);
+      //       }}
+      //       >
+      //         <img style={{ width: '1rem' }} src={item.default} alt="nothing" />
+      //       </div>
+      //     );
+      //   }
+      //   return res;
+      // });
+
       this.setState({
-        sliderContent: content1.concat(content2),
+        sliderContent: content1,
       });
-    } catch {
-      console.warn('warn or error in function componentDidMount');
+
+      this.change(this.getRandomNumber(13));
+    } catch (err) {
+      console.warn(`warn or error in function componentDidMount:\n${err}`);
     }
   }
+
   render() {
     return (
       <>
         <div className="home-content tear-clothe">
           <div className="menu">
             <div className="slider-img">
-              <div className="photo-container">
+              <div className="photo-container cannotselect">
                 <div className="photo-cont-item animation-1">{this.state.sliderContent}</div>
               </div>
             </div>
@@ -144,11 +160,7 @@ class TearClothe extends React.Component {
                   marginLeft: 70
                 }}
               >
-                <Slider
-                  vertical
-                  defaultValue={this.state.radius}
-                  min={10}
-                  max={30}
+                <Slider vertical defaultValue={this.state.radius} min={10} max={30}
                   marks={{
                     10: '10 Size',
                     30: 30,
@@ -162,13 +174,10 @@ class TearClothe extends React.Component {
               </div>
             </div>
           </div>
-          <canvas
-            id="tear"
-            className="tear"
-            width="320"
-            height="480"
-            ref={this.canvasRef}
-            onMouseDown={() =>
+          <canvas id="tear" className="tear" style={{
+            cursor: `url(${this.state.radius > 20 ? iconPath : iconPath1}), auto`
+          }}
+            width="320" height="480" ref={this.canvasRef} onMouseDown={() =>
               this.setState({
                 down: true,
               })
@@ -179,7 +188,7 @@ class TearClothe extends React.Component {
                 down: false,
               })
             }
-          ></canvas>
+          >您的浏览器不支持Canvas</canvas>
         </div>
       </>
     );

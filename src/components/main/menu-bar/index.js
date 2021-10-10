@@ -41,27 +41,26 @@ function MenuBarCom(props) {
             selectedKeys={selectedKeys.currentKey}
           >
             <Menu.Item key="1" icon={<IconFont type="icon-tuijian" />} onClick={toPage.bind(this, 'home', '1')}>
-              Recommend
+              Home
             </Menu.Item>
-            <Menu.Item key="2" icon={<IconFont type="icon-shipin" />} onClick={toPage.bind(this, 'movie', '2')}>
-              Movie
+            <Menu.Item key="2" icon={<IconFont type="icon-shipin" />} onClick={toPage.bind(this, 'tear-clothe', '2')}>
+              Tear-clothe
             </Menu.Item>
-            <Menu.Item key="3" icon={<IconFont type="icon-paihangbang" />} onClick={toPage.bind(this, 'rank', '3')}>
-              Leaderboard
+            <Menu.Item key="3" icon={<IconFont type="icon-paihangbang" />} onClick={toPage.bind(this, 'fymap', '3')}>
+              Covid-19 map
             </Menu.Item>
             <SubMenu key="sub1" icon={<IconFont type="icon-bag-case-work-need-job-ecacdf" />} title="Toolbox">
-              <Menu.Item key="5" onClick={toPage.bind(this, 'fymap', '5')}>
-                {' '}
-                Covid-19 map
+              <Menu.Item key="5" onClick={toPage.bind(this, 'rank', '5')}>
+                Leaderboard
               </Menu.Item>
               <Menu.Item key="6" onClick={toPage.bind(this, 'recordLog', '6')}>
                 Record Log
               </Menu.Item>
-              <Menu.Item key="7" onClick={toPage.bind(this, 'tear-clothe', '7')}>
-                Tear Clothe
+              <Menu.Item key="7" onClick={toPage.bind(this, 'movie', '7')}>
+                Movie
               </Menu.Item>
-              <Menu.Item key="8" onClick={toPage.bind(this, 'clock', '8')}>
-                Clock
+              <Menu.Item key="8" onClick={toPage.bind(this, 'recommend', '8')}>
+                Recommend
               </Menu.Item>
             </SubMenu>
             <SubMenu key="sub2" icon={<IconFont type="icon-icon-test" />} title="Community">

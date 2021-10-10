@@ -1,68 +1,65 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Api from 'src/api';
 import './index.less';
 import './index.scss';
 
 function Movie(props) {
+  const [photoArray, setPhotoArray] = useState([]);
+
   useEffect(() => {
-    // store.dispatch(setShowLoaingRedux(false))
-    console.log('did mount');
+    async function init() {
+      try {
+        let result = await Api.get('/movie/photo');
+        console.log('result in movie', result);
+        if (result && result.data && result.data.photoList) {
+          setPhotoArray(result.data.photoList)
+          console.log('list', result.data.photoList);
+        } else {
+          throw new Error(`Fetch movie data error`);
+        }
+      } catch (err) {
+        console.warn('err in movie componets', err);
+      }
+    }
+    init();
+    return () => {
+      // setPhotoArray([])
+      setPhotoArray((state, callback) => {
+        return
+      })
+    }
   }, []);
+  const renderContent = () => {
+    return photoArray.map((item, index) => {
+      return (
+        <div className="photo-item" style={{ backgroundImage: `url(${item.default.default})` }} key={item.key}>
+        </div>
+      )
+    })
+
+  }
   return (
     <div className="home-content movie-content">
       <div className="page">
         <div className="container">
           <div className="photo-container">
             <div className="photo-cont-item animation-1">
-              <div className="photo-item photo-1"></div>
-              <div className="photo-item photo-2"></div>
-              <div className="photo-item photo-3"></div>
-              <div className="photo-item photo-4"></div>
-              <div className="photo-item photo-5"></div>
-              <div className="photo-item photo-6"></div>
-
-              <div className="photo-item photo-1"></div>
-              <div className="photo-item photo-2"></div>
-              <div className="photo-item photo-3"></div>
-              <div className="photo-item photo-4"></div>
-              <div className="photo-item photo-5"></div>
-              <div className="photo-item photo-6"></div>
+              {renderContent.call(this, photoArray)}
             </div>
 
             <div className="photo-cont-item animation-2">
-              <div className="photo-item photo-7"></div>
-              <div className="photo-item photo-8"></div>
-              <div className="photo-item photo-9"></div>
-              <div className="photo-item photo-10"></div>
-              <div className="photo-item photo-11"></div>
-              <div className="photo-item photo-12"></div>
-
-              <div className="photo-item photo-7"></div>
-              <div className="photo-item photo-8"></div>
-              <div className="photo-item photo-9"></div>
-              <div className="photo-item photo-10"></div>
-              <div className="photo-item photo-11"></div>
-              <div className="photo-item photo-12"></div>
+              {renderContent.call(this, photoArray.reverse())}
             </div>
 
             <div className="photo-cont-item animation-3">
-              <div className="photo-item photo-13"></div>
-              <div className="photo-item photo-14"></div>
-              <div className="photo-item photo-15"></div>
-              <div className="photo-item photo-16"></div>
-              <div className="photo-item photo-17"></div>
-              <div className="photo-item photo-18"></div>
-
-              <div className="photo-item photo-13"></div>
-              <div className="photo-item photo-14"></div>
-              <div className="photo-item photo-15"></div>
-              <div className="photo-item photo-16"></div>
-              <div className="photo-item photo-17"></div>
-              <div className="photo-item photo-18"></div>
+              {renderContent.call(this, photoArray.sort((item1, item2) => {
+                return item1.number - item2.number
+              }))}
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 

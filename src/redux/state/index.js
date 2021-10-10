@@ -1,6 +1,7 @@
 const initialState = {
   playFlag: 'pause',
   musicList: [],
+  musicNameList: [],
   currentIndex: localStorage.currentIndex ? parseInt(localStorage.currentIndex) : 0,
   currentAudio: {},
   currentSrc: '',

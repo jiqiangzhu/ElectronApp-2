@@ -6,49 +6,57 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing : antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: rgba(0,0,0,0); */
+  // background-image: url(./assets/img/logo.gif);
+  // background-repeat: no-repeat;
+  // background-position: right bottom;
+  // background-size: 4rem auto;
+  // background-position: ;
+  /* background-color    : rgba(0,0,0,0); */
 }
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+$wi2: 2rem;
+
 .bg-gif {
-  position: fixed;
-  width: 3rem;
-  height: 3rem;
-  right: 0;
-  bottom: 0;
-  z-index: 0;
-  background-image: url(./assets/img/logo.gif);
-  background-position: right bottom;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: 3rem auto;
-  -webkit-app-region: drag;
-  background-color: #3b3b4dc1;
+  position                : fixed;
+  width                   : $wi2;
+  height                  : $wi2;
+  right                   : $wi2 / 2;
+  bottom                  : $wi2 / 2;
+  z-index                 : 0;
+  background-image        : url(./assets/img/logo.gif);
+  background-repeat       : no-repeat;
+  background-size         : $wi2 auto;
+  -webkit-app-region      : drag;
+  filter                  : brightness(30%);
 }
-.bg-gif::after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  content: "";
-  background-color: #3b3b4d;
-  opacity: 0.7;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-}
+
+// .bg-gif::after {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   content: "";
+//   opacity: 0.7;
+//   z-index: 0;
+//   width: 100%;
+//   height: 100%;
+// }
 /* iconfont 通用样式  */
 .icon {
-  width: 1em;
-  height: 1em;
+  width         : 1em;
+  height        : 1em;
   vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
+  fill          : currentColor;
+  overflow      : hidden;
 }
+
 #root {
   position: relative;
-  display: flex;
+  display : flex;
   overflow: hidden;
 }

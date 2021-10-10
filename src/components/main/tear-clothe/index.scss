@@ -59,22 +59,23 @@
       }
     }
 
+    .tear {
+      // cursor: url('./tear.ico'), auto;
+    }
+
     .ant-slider-mark-text {
       color: #fff;
     }
+
   }
 
-  .tear {
-    cursor: pointer;
-  }
-}
+  @keyframes scroller1 {
+    0% {
+      transform: translateX(0);
+    }
 
-@keyframes scroller1 {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(calc(-3.8rem * 3));
+    100% {
+      transform: translateX(calc(-3.8rem * 3));
+    }
   }
 }

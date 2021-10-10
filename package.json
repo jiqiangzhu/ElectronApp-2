@@ -28,6 +28,7 @@
     "react": "^17.0.2",
     "react-chunk": "^7.3.0",
     "react-dom": "^17.0.2",
+    "react-lazyload": "^3.2.0",
     "react-redux": "^7.2.4",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
@@ -46,7 +47,8 @@
     "build": "craco  build",
     "test": "craco  test",
     "ele": "electron .",
-    "dev": "concurrently \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm start\""
+    "dev": "concurrently \"wait-on http://localhost:3001 && electron .\" \"cross-env BROWSER=none npm start\"",
+    "prod": "electron-packager . --overwrite --platform=win32 --electron-version=11.4.3  --arch=ia32 --out=out"
   },
   "eslintConfig": {
     "extends": [
@@ -71,8 +73,8 @@
     "babel-plugin-transform-decorators-legacy": "^1.3.5",
     "cross-env": "^7.0.3",
     "electron": "^11.4.3",
-    "electron-builder": "^22.11.7",
     "electron-is-dev": "^1.2.0",
+    "electron-builder": "^22.11.7",
     "electron-packager": "^15.3.0",
     "province-city-china": "^8.0.0",
     "react-scripts": "4.0.3",

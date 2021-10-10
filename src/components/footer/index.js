@@ -10,6 +10,8 @@ import store from '@redux';
 import { playMusicRedux, currentIndexRedux, musicListRedux, audioRefRedux } from '@redux/actions/play-actions';
 import { PlayStatusCom, SetPlayModeCom, SetVolumeCom } from './PlayController';
 import MusicListPopup from '@/components/main/popup';
+import { musicNameRedux } from 'src/redux/actions/play-actions';
+import { connect } from 'react-redux';
 
 const IconFont = createFromIconfontCN();
 
@@ -18,7 +20,8 @@ const IconFont = createFromIconfontCN();
  * @param {Object} props
  * @returns
  */
-function FooterCom(props) {
+function Footer(props) {
+  const { musicNameList, setMusicNameList } = props;
   const [beginTime, setBeginTime] = useState(0);
   // 1 list loop 2 single circle 3 random default 1
   const [playMode, setPlayMode] = useState('1');
@@ -107,6 +110,7 @@ function FooterCom(props) {
     let reducer = store.getState().playReducer;
     let listLen = store.getState().playReducer.musicList.length;
     let currIndex = store.getState().playReducer.currentIndex;
+    console.log('currIndex============', currIndex);
     if (listLen <= 0) {
       message.error({
         content: 'music list is null',
@@ -138,7 +142,16 @@ function FooterCom(props) {
         let tempIndex = commonUtils.randomInteger(currIndex, listLen);
         store.dispatch(currentIndexRedux(tempIndex, audioRef.current));
       }
-
+      setPopupList(() =>
+        fileNameArray.map((item, ind) => {
+          return (
+            <p onDoubleClick={() => playMusicByPopupList(ind)} key={ind}
+              className={ind === store.getState().playReducer.currentIndex ? 'music-active' : ''}>
+              {item.indexOf('.mp3') !== -1 ? item.substr(0, item.indexOf('.mp3')) : item}
+            </p>
+          );
+        })
+      );
       if (reducer.currentAudio && reducer.playFlag === 'play') {
         reducer.currentAudio.play();
       }
@@ -183,7 +196,12 @@ function FooterCom(props) {
   };
 
   const importLocal = async (e, dirPath = 'D:/') => {
-    await windowUtils.openFolder(dirPath, readDir);
+    try {
+      let res = await windowUtils.openFolder(dirPath);
+      console.log('res========', res);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const getDuration = () => {
@@ -192,49 +210,60 @@ function FooterCom(props) {
   };
 
   const readDir = async (event, arg) => {
-    store.dispatch(audioRefRedux(audioRef.current));
-    let musicList = fileNameArray;
-    let fullPathList = store.getState().playReducer.musicList.musicList;
-    let path;
-    if (typeof arg === 'string') {
-      path = arg;
-    } else if (typeof arg === 'object') {
-      path = arg.filePaths[0];
-    }
-    fsUtils.readMusicDir(path, (err, files) => {
-      try {
-        localStorage.defaultMusicPath = path;
-        if (files.length > 0) {
-          files.filter((item, index) => {
-            if (item.indexOf('.mp3') !== -1) {
-              musicList.push(item);
-              return true;
-            }
-            return false;
-          });
-          musicList = Array.from(new Set(musicList)); //de-duplication
-          fullPathList = musicList.map((item, index) => {
-            return path + '\\' + item;
-          });
-          setFileNameArray(musicList);
-          store.dispatch(musicListRedux(fullPathList));
-          console.log('currentIndex', store.getState().playReducer);
-          setCurrentSrc(store.getState().playReducer.musicList[store.getState().playReducer.currentIndex]);
-          setPopupList(() =>
-            musicList.map((item, index) => {
-              return (
-                <p onDoubleClick={() => playMusicByPopupList(index)} key={index} className={index === store.getState().playReducer.currentIndex ? 'music-active' : ''}>
-                  {item.indexOf('.mp3') !== -1 ? item.substr(0, item.indexOf('.mp3')) : item}
-                </p>
-              );
-            })
-          );
-        }
-      } catch (e) {
-        console.error('err----------', err);
-        console.error('e----------', e);
+    try {
+      console.log('arg', arg);
+      store.dispatch(audioRefRedux(audioRef.current));
+      let musicList = fileNameArray;
+      let fullPathList = store.getState().playReducer.musicList.musicList;
+      let path;
+      if (typeof arg === 'string') {
+        path = arg;
+      } else if (typeof arg === 'object') {
+        path = arg?.filePaths[0];
       }
-    });
+      if (!path) return;
+      fsUtils.readMusicDir(path, (err, files) => {
+        try {
+          if (err) {
+            throw new Error('err', err)
+          }
+          localStorage.defaultMusicPath = path;
+          console.log(`files from ${path}`, files);
+          if (files.length > 0) {
+            files.filter((item, index) => {
+              if (item.indexOf('.mp3') !== -1) {
+                musicList.push(item);
+                return true;
+              }
+              return false;
+            });
+            musicList = Array.from(new Set(musicList)); //de-duplication
+            fullPathList = musicList.map((item, index) => {
+              return path + '\\' + item;
+            });
+            setFileNameArray(musicList);
+            setMusicNameList(musicList);
+            store.dispatch(musicListRedux(fullPathList));
+            console.log('currentIndex', store.getState().playReducer);
+            setCurrentSrc(store.getState().playReducer.musicList[store.getState().playReducer.currentIndex]);
+            setPopupList(() =>
+              musicList.map((item, index) => {
+                return (
+                  <p onDoubleClick={() => playMusicByPopupList(index)} key={index}
+                    className={index === store.getState().playReducer.currentIndex ? 'music-active' : ''}>
+                    {item.indexOf('.mp3') !== -1 ? item.substr(0, item.indexOf('.mp3')) : item}
+                  </p>
+                );
+              })
+            );
+          }
+        } catch (e) {
+          console.warn('err', e);
+        }
+      });
+    } catch (e) {
+      console.error('e----------', e);
+    }
   };
   const playMusicByPopupList = (index) => {
     const reducer = store.getState().playReducer;
@@ -252,7 +281,8 @@ function FooterCom(props) {
       setPopupList(() =>
         fileNameArray.map((item, ind) => {
           return (
-            <p onDoubleClick={() => playMusicByPopupList(ind)} key={ind} className={ind === store.getState().playReducer.currentIndex ? 'music-active' : ''}>
+            <p onDoubleClick={() => playMusicByPopupList(ind)} key={ind}
+              className={ind === store.getState().playReducer.currentIndex ? 'music-active' : ''}>
               {item.indexOf('.mp3') !== -1 ? item.substr(0, item.indexOf('.mp3')) : item}
             </p>
           );
@@ -263,6 +293,7 @@ function FooterCom(props) {
       console.error(e);
     }
   };
+
   const setVolume = (value) => {
     try {
       if (!isNaN(value)) {
@@ -274,15 +305,20 @@ function FooterCom(props) {
       console.log(`program reported an error when set volume \n ${e}`);
     }
   };
+
   return (
-    <div className="footer">
-      <audio onTimeUpdate={updateTime.bind(this)} onError={playMusic.bind(this, 'pause')} ref={audioRef} preload="true" loop={playMode === '2' ? true : false} controls={false} onEnded={playNext.bind(this, 1)} src={currentSrc} onCanPlay={getDuration.bind(this)}></audio>
+    <div className="footer webkit-drag">
+      <audio onTimeUpdate={updateTime.bind(this)}
+        onError={playMusic.bind(this, 'pause')}
+        ref={audioRef} preload="true"
+        loop={playMode === '2' ? true : false} controls={false}
+        onEnded={playNext.bind(this, 1)} src={currentSrc} onCanPlay={getDuration.bind(this)}></audio>
       <Row align="middle" style={{ width: '100%' }}>
         <Col span={3}>
           <Space size={10}>
-            <StepBackwardOutlined onClick={playNext.bind(this, -1)} style={{ fontSize: '24px', cursor: 'pointer' }} />
+            <StepBackwardOutlined className="webkit-no-drag" onClick={playNext.bind(this, -1)} style={{ fontSize: '24px', cursor: 'pointer' }} />
             <PlayStatusCom playStatus={store.getState().playReducer.playFlag} onClick={playMusic.bind(this)} />
-            <StepForwardOutlined onClick={playNext.bind(this, 1)} style={{ fontSize: '24px', cursor: 'pointer' }} />
+            <StepForwardOutlined onClick={playNext.bind(this, 1)} style={{ fontSize: '24px', cursor: 'pointer' }} className="webkit-no-drag" />
           </Space>
         </Col>
         <span ref={beginRef} style={{ paddingBottom: '10px', paddingRight: '10px' }} className="cannotselect">
@@ -316,9 +352,36 @@ function FooterCom(props) {
         </Col>
       </Row>
 
-      <MusicListPopup musicList={fileNameArray} musicDom={popupList} visible={popupVisible} onClose={() => setPopupVisible(false)} />
+      <MusicListPopup musicList={fileNameArray} setPopupList={() => {
+        setPopupList(() =>
+          musicNameList.map((item, ind) => {
+            return (
+              <p onDoubleClick={() => playMusicByPopupList(ind)} key={ind}
+                className={ind === store.getState().playReducer.currentIndex ? 'music-active' : ''}>
+                {item.indexOf('.mp3') !== -1 ? item.substr(0, item.indexOf('.mp3')) : item}
+              </p>
+            );
+          })
+        )
+      }} musicDom={popupList} visible={popupVisible} onClose={() => setPopupVisible(false)} />
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    musicNameList: state.playReducer.musicNameList
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setMusicNameList: (nameList) => {
+      dispatch(musicNameRedux(nameList));
+    },
+  };
+};
+
+const FooterCom = connect(mapStateToProps, mapDispatchToProps)(Footer);
 
 export default FooterCom;
