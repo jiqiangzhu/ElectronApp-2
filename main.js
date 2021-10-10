@@ -1,5 +1,5 @@
 const { app, BrowserWindow, ipcMain, globalShortcut, dialog } = require('electron');
-const isDev = require('electron-is-dev');
+const isDev = require('electron-is-dev') ?? false;
 const path = require('path');
 let mainWindow;
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
@@ -19,7 +19,7 @@ app.on('ready', () => {
       nodeIntegration: true, //enable to use node in web
       enableRemoteModule: true,
       contextIsolation: false,
-      webSecurity: false,
+      webSecurity: false
     },
     titleBarStyle: 'customButtonsOnHover',
     frame: false,
@@ -29,8 +29,8 @@ app.on('ready', () => {
   });
 
   mainWindow.setMenu(null);
-  const urlLocation = isDev ? 'http://localhost:3001' : 'dummyurl';
-  mainWindow.loadURL(urlLocation);
+  const urlLocation = isDev ? 'http://localhost:3001' : '';
+  urlLocation ? mainWindow.loadURL(urlLocation) : mainWindow.loadFile('./public/index.html');
   mainWindow.setMaximizable(true);
   mainWindow.on('maximize', () => {
     let windowSize = mainWindow.getContentSize();

@@ -7,6 +7,7 @@ import LoadingCom from './components/main/loading';
 import { connect } from 'react-redux';
 import ipcRendererUtil from './utils/ipc-render-util';
 import '@/utils/string-util';
+import Earth from './components/cool-css3/earth';
 /**
  * main Components
  * @param {*} props
@@ -34,7 +35,8 @@ function AppCom(props) {
 
   return (
     <Skeleton active loading={loadingFlag} rows={100}>
-      <div className="bg-gif"></div>
+      {/* <div className="bg-gif"></div> */}
+      <Earth />
       <div className="main-content">{routes}</div>
       {RenderCom}
     </Skeleton>

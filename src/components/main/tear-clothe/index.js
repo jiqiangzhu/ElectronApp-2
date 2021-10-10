@@ -16,7 +16,6 @@ class TearClothe extends React.Component {
       img2: '',
       radius: 20,
       imgArr: [],
-      index: this.getRandomNumber(14), //奇数展示，偶数不展示
       sliderContent: '',
     };
     this.canvasRef = React.createRef();
@@ -49,6 +48,7 @@ class TearClothe extends React.Component {
     }
   };
   change = (index = 0) => {
+    index = !(index > 13 || index < 0) ? index : 0;
     console.log('index', index);
     try {
       store.dispatch(setShowLoaingRedux(true));
@@ -61,8 +61,7 @@ class TearClothe extends React.Component {
       img2.src = this.state.imgArr[index + 1].default;
       img1.onload = () => {
         this.setState({
-          img1: img1,
-          index: index,
+          img1: img1
         });
         this.canvasRef.current
           .getContext('2d')
@@ -73,18 +72,22 @@ class TearClothe extends React.Component {
           img2: img2,
         });
       };
-    } catch {
-      console.warn('warn or error in function change');
+    } catch (e) {
+      console.warn(`warn or error in function change:\n${e}`);
     }
   };
   async componentDidMount() {
     try {
       const result = await Api.get('/tear/clothe');
+      console.log('result.data.data====', result.data.data);
+      if (!result?.data?.data) {
+        throw new Error("get photo error");
+      }
+      const data = result.data.data;
       this.setState({
-        imgArr: result.data.data,
+        imgArr: data,
       });
-      this.change(this.state.index);
-      let content1 = this.state.imgArr.map((item, index) => {
+      let content1 = data.map((item, index) => {
         let res = '';
         if (index % 2 === 0) {
           res = (
@@ -101,27 +104,31 @@ class TearClothe extends React.Component {
         }
         return res;
       });
-      let content2 = this.state.imgArr.map((item, index) => {
-        let res = '';
-        if (index % 2 === 0) {
-          res = (
-            <div key={index + 100} className="photo-item" onClick={() => {
-              this.change(index);
-            }}
-            >
-              <img style={{ width: '1rem' }} src={item.default} alt="nothing" />
-            </div>
-          );
-        }
-        return res;
-      });
+      // let content2 = data.map((item, index) => {
+      //   let res = '';
+      //   if (index % 2 === 0) {
+      //     res = (
+      //       <div key={index + 100} className="photo-item" onClick={() => {
+      //         this.change(index);
+      //       }}
+      //       >
+      //         <img style={{ width: '1rem' }} src={item.default} alt="nothing" />
+      //       </div>
+      //     );
+      //   }
+      //   return res;
+      // });
+
       this.setState({
-        sliderContent: content1.concat(content2),
+        sliderContent: content1,
       });
-    } catch {
-      console.warn('warn or error in function componentDidMount');
+
+      this.change(this.getRandomNumber(13));
+    } catch (err) {
+      console.warn(`warn or error in function componentDidMount:\n${err}`);
     }
   }
+
   render() {
     return (
       <>
