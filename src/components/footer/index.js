@@ -7,12 +7,11 @@ import windowUtils from '@localUtils/window-util';
 import fsUtils from '@localUtils/fs-util';
 import { StepBackwardOutlined, StepForwardOutlined, createFromIconfontCN } from '@ant-design/icons';
 import store from '@redux';
-import { playMusicRedux, currentIndexRedux, musicListRedux, audioRefRedux } from '@redux/actions/play-actions';
+import { playMusicRedux, currentIndexRedux, musicListRedux, audioRefRedux, setShowLoaingRedux } from '@redux/actions/play-actions';
 import { PlayStatusCom, SetPlayModeCom, SetVolumeCom } from './PlayController';
 import MusicListPopup from '@/components/main/popup';
 import { musicNameRedux } from 'src/redux/actions/play-actions';
 import { connect } from 'react-redux';
-
 const IconFont = createFromIconfontCN();
 
 /**
@@ -198,9 +197,17 @@ function Footer(props) {
   const importLocal = async (e, dirPath = 'D:/') => {
     try {
       let res = await windowUtils.openFolder(dirPath);
-      console.log('res========', res);
+      if (!res?.filePaths) {
+        console.log('出错了');
+        return;
+      }
+
+      store.dispatch(setShowLoaingRedux(true));
+      let files = await fsUtils.readMusicDir1(res.filePaths[0]);
+      console.log('files=============', files);
+      store.dispatch(setShowLoaingRedux(false));
     } catch (err) {
-      console.log(err);
+      console.log('err============', err);
     }
   };
 
@@ -265,6 +272,7 @@ function Footer(props) {
       console.error('e----------', e);
     }
   };
+  
   const playMusicByPopupList = (index) => {
     const reducer = store.getState().playReducer;
     try {

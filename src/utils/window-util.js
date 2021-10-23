@@ -52,13 +52,19 @@ const windowUtils = {
    * @param {*} path
    * @param {*} resolve
    */
-  openFolder: async function (path, resolve) {
-    try {
-      await ipcRenderer.send('openFolder', path);
-      ipcRenderer.on('asynchronous-reply', resolve);
-    } catch (err) {
-      console.warn(err);
-    }
+  openFolder: async function (path) {
+    return new Promise((resolve, reject) => {
+      try {
+        ipcRenderer.send('openFolder', path);
+        ipcRenderer.on('asynchronous-reply', (e, args) => {
+          resolve(args)
+        });
+      } catch (err) {
+        console.warn(err);
+        reject(err)
+      }
+    })
+
   },
 
   /**
